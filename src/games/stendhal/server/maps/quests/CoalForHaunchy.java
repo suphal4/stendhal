@@ -259,3 +259,4 @@ public class CoalForHaunchy extends AbstractQuest {
 		return "Haunchy Meatoch";
 	}
 }
+

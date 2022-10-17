@@ -118,7 +118,13 @@ public class CoalForHaunchyTest extends ZonePlayerAndNPCTestImpl {
 		assertEquals("You don't have the coal amount which I need yet. Go and pick some more pieces up, please.", getReply(haunchy));
 		haunchyEng.step(player, "bye");
 		assertEquals("A nice day to you! Always keep your fire burning!", getReply(haunchy));
-
+		PlayerTestHelper.equipWithStackableItem(player, "charcoal", 10);
+		haunchyEng.step(player, "hi");
+		assertEquals("Hey! Nice day for a BBQ!", getReply(haunchy));
+		haunchyEng.step(player, "task");
+		assertEquals("You don't have the coal amount which I need yet. Go and pick some more pieces up, please.", getReply(haunchy));
+		haunchyEng.step(player, "bye");
+		assertEquals("A nice day to you! Always keep your fire burning!", getReply(haunchy));
 		// get another 15 coals
 		PlayerTestHelper.equipWithStackableItem(player, "coal", 25);
 		haunchyEng.step(player, "hi");
@@ -131,7 +137,19 @@ public class CoalForHaunchyTest extends ZonePlayerAndNPCTestImpl {
 		assertEquals("waiting", player.getQuest(questSlot, 0));
 		haunchyEng.step(player, "bye");
 		assertEquals("A nice day to you! Always keep your fire burning!", getReply(haunchy));
-
+		
+		//test for charcoal
+		PlayerTestHelper.equipWithStackableItem(player, "charcoal", 25);
+		haunchyEng.step(player, "hi");
+		assertEquals("Hey! Nice day for a BBQ!", getReply(haunchy));
+		haunchyEng.step(player, "task");
+		// We get one or more grilled steaks a reward:
+		// You see a fresh grilled steak. It smells awesome and is really juicy. It is a special quest reward for player, and cannot be used by others. Stats are (HP: 200).
+		assertTrue(getReply(haunchy).matches("Thank you!! Take .* grilled steaks? from my grill!"));
+		assertTrue(player.isEquipped("grilled steak"));
+		assertEquals("waiting", player.getQuest(questSlot, 0));
+		haunchyEng.step(player, "bye");
+		assertEquals("A nice day to you! Always keep your fire burning!", getReply(haunchy));
 		// -----------------------------------------------
 
 		haunchyEng.step(player, "hi");
