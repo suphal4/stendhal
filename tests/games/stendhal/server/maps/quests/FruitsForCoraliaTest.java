@@ -173,7 +173,7 @@ public class FruitsForCoraliaTest extends ZonePlayerAndNPCTestImpl {
 
 		// -----------------------------------------------
 
-		assertEquals("I'd still like 4 #apples, 5 #bananas, 9 #cherries, 2 #'bunches of grapes', 4 #pears, 2 #pomegranates, and a #watermelon. Have you brought any?", getReply(npc));
+		assertEquals("I'd still like 4 #apples, 5 #bananas, 9 #cherries, 2 #'bunches of grapes', 4 #pears, 2 #pomegranates, and a #watermelon. Have you brought any, or #everything?", getReply(npc));
 
 		// -----------------------------------------------
 
@@ -217,7 +217,7 @@ public class FruitsForCoraliaTest extends ZonePlayerAndNPCTestImpl {
 
 		// -----------------------------------------------
 
-		assertEquals("I'd still like 5 #bananas, 9 #cherries, 2 #'bunches of grapes', 4 #pears, 2 #pomegranates, and a #watermelon. Have you brought any?", getReply(npc));
+		assertEquals("I'd still like 5 #bananas, 9 #cherries, 2 #'bunches of grapes', 4 #pears, 2 #pomegranates, and a #watermelon. Have you brought any, or #everything?", getReply(npc));
 
 		// -----------------------------------------------
 
@@ -315,8 +315,8 @@ public class FruitsForCoraliaTest extends ZonePlayerAndNPCTestImpl {
 		en.step(player, "hat");
 
 		// -----------------------------------------------
-
-		player.setQuest(questSlot, "done;0");
+		//
+		//		player.setQuest(questSlot, "done;0");
 		//player.setQuest(questSlot, 1, "0");	This doesn't seem to work either.
 
 
@@ -332,5 +332,177 @@ public class FruitsForCoraliaTest extends ZonePlayerAndNPCTestImpl {
 
 		assertEquals("Bye.", getReply(npc));
 		*/
+
 	}
+	
+	@Test
+	public void testEverythingOption() {
+		npc = SingletonRepository.getNPCList().get("Coralia");
+		en = npc.getEngine();
+
+
+		// -----------------------------------------------
+
+
+		en.step(player, "hi");
+
+		// -----------------------------------------------
+
+		assertEquals("Oh hello there, did I just catch you admiring my beautiful #hat?", getReply(npc));
+
+		// -----------------------------------------------
+
+		en.step(player, "hat");
+
+		// -----------------------------------------------
+
+		assertEquals("It's a shame for you to see it all withered like this, it really needs some fresh #fruits...", getReply(npc));
+
+		// -----------------------------------------------
+
+		en.step(player, "fruit");
+
+		// -----------------------------------------------
+
+		assertEquals("Would you be kind enough to find me some fresh fruits for my hat? I'd be ever so grateful!", getReply(npc));
+
+		// -----------------------------------------------
+
+		en.step(player, "no");
+
+		// -----------------------------------------------
+
+		assertEquals("These exotic hats don't keep themselves you know...", getReply(npc));
+
+		// -----------------------------------------------
+
+		en.step(player, "bye");
+
+		// -----------------------------------------------
+
+		assertEquals("Bye.", getReply(npc));
+
+		// -----------------------------------------------
+
+
+		// -----------------------------------------------
+
+		en.step(player, "hi");
+
+		// -----------------------------------------------
+
+		assertEquals("Oh hello there, did I just catch you admiring my beautiful #hat?", getReply(npc));
+
+		// -----------------------------------------------
+
+		en.step(player, "quest");
+
+		// -----------------------------------------------
+
+		assertEquals("Are you willing to find me some fresh fruits for my hat yet?", getReply(npc));
+
+		// -----------------------------------------------
+
+		en.step(player, "yes");
+
+		// -----------------------------------------------
+
+		assertEquals("That's wonderful! I'd like these fresh fruits: 4 #apples, 5 #bananas, 9 #cherries, 2 #'bunches of grapes', 4 #pears, 2 #pomegranates, and a #watermelon.", getReply(npc));
+
+		// -----------------------------------------------
+
+		en.step(player, "apples");
+
+		// -----------------------------------------------
+
+		assertEquals("Glowing, radiant apples! The ones I have just now came from somewhere east of Semos.", getReply(npc));
+
+		// -----------------------------------------------
+
+		en.step(player, "bye");
+
+		// -----------------------------------------------
+
+		assertEquals("Bye.", getReply(npc));
+
+		// -----------------------------------------------
+
+		PlayerTestHelper.equipWithStackableItem(player, "apple", 4);
+		
+		PlayerTestHelper.equipWithStackableItem(player, "banana", 5);
+		
+		PlayerTestHelper.equipWithStackableItem(player, "grapes", 2);
+		
+		PlayerTestHelper.equipWithStackableItem(player, "pear", 4);
+		
+		PlayerTestHelper.equipWithStackableItem(player, "pomegranate", 2);
+		
+		PlayerTestHelper.equipWithStackableItem(player, "watermelon", 1);
+		
+		//#everything except 9x cherries
+
+
+		en.step(player, "hi");
+
+		//Testing #everything when false
+
+		assertEquals("Hello again. If you've brought me some fresh fruits for my #hat, I'll happily take them!", getReply(npc));
+
+		en.step(player, "hat");
+
+		assertEquals("I'd still like 4 #apples, 5 #bananas, 9 #cherries, 2 #'bunches of grapes', 4 #pears, 2 #pomegranates, and a #watermelon. Have you brought any, or #everything?", getReply(npc));
+		
+		en.step(player, "everything");
+		
+		assertEquals("I still need some more, you did not have everything", getReply(npc));
+		
+		en.step(player, "bye");
+		
+		assertEquals("Bye.", getReply(npc));
+		
+		PlayerTestHelper.equipWithStackableItem(player, "cherry", 9);
+		
+		final int xp = player.getXP();//initial xp
+		
+		final double karma = player.getKarma();//initial karma
+		
+		//Testing #everything when true
+		
+		en.step(player, "hi");
+		
+		assertEquals("Hello again. If you've brought me some fresh fruits for my #hat, I'll happily take them!", getReply(npc));
+		
+		en.step(player, "hat");
+		
+		assertEquals("I'd still like 9 #cherries. Have you brought any, or #everything?", getReply(npc));
+		
+		en.step(player, "everything");
+		
+		assertEquals("My hat has never looked so delightful! Thank you ever so much! Here, take this as a reward.", getReply(npc));
+		
+		en.step(player, "bye");
+		
+		//Testing rewards
+		
+		assertTrue(player.isEquipped("crepes suzette"));
+		
+		assertTrue(player.isEquipped("minor potion"));
+		
+		assertThat(player.getXP(), greaterThan(xp));
+		
+		assertThat(player.getKarma(), greaterThan(karma));
+		
+
+	}
+	
+	
 }
+	
+	
+	
+	
+	
+	
+	
+	
+	

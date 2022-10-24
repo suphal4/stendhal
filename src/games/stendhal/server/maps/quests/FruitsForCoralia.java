@@ -5,7 +5,9 @@ import java.util.List;
 import java.util.Map;
 
 import games.stendhal.common.grammar.Grammar;
+import games.stendhal.common.parser.Sentence;
 import games.stendhal.server.entity.npc.ChatAction;
+import games.stendhal.server.entity.npc.EventRaiser;
 import games.stendhal.server.entity.npc.ConversationPhrases;
 import games.stendhal.server.entity.npc.ConversationStates;
 import games.stendhal.server.entity.npc.SpeakerNPC;
@@ -151,6 +153,7 @@ public class FruitsForCoralia extends AbstractQuest {
 
     public void prepareQuestStep() {
     	SpeakerNPC npc = npcs.get("Coralia");
+    
 
     	// various quest introductions
 
@@ -233,10 +236,10 @@ public class FruitsForCoralia extends AbstractQuest {
 			ConversationStates.ATTENDING,
 			"Hello again. If you've brought me some fresh fruits for my #hat, I'll happily take them!",
 			null);
-
-
-
+    	
+    	
     	// specific fruit info
+    	
     	npc.add(ConversationStates.QUESTION_1,
         	"apple",
         	new QuestActiveCondition(QUEST_SLOT),
@@ -297,7 +300,7 @@ public class FruitsForCoralia extends AbstractQuest {
     		new QuestActiveCondition(QUEST_SLOT),
     		ConversationStates.QUESTION_2,
     		null,
-    		new SayRequiredItemsFromCollectionAction(QUEST_SLOT, "I'd still like [items]. Have you brought any?"));
+    		new SayRequiredItemsFromCollectionAction(QUEST_SLOT, "I'd still like [items]. Have you brought any, or #everything?"));
 
     	// player says he didn't bring any items
 		npc.add(ConversationStates.QUESTION_2,
@@ -325,6 +328,27 @@ public class FruitsForCoralia extends AbstractQuest {
 			new EquipRandomAmountOfItemAction("minor potion", 2, 8),
 			new SetQuestToTimeStampAction(QUEST_SLOT, 1)
 		);
+    	
+    	//#everything trigger info
+    	npc.add(ConversationStates.QUESTION_2,
+            	"everything",
+            	new QuestActiveCondition(QUEST_SLOT),
+            	ConversationStates.QUESTION_2, null,
+            	new ChatAction() {
+    		
+    		@Override
+    		
+    		    public void fire(final Player player,
+    		    		final Sentence sentence,
+    		    		final EventRaiser npc) {
+    			
+    			verifyEverything(player, npc, completeAction);
+    		}
+    		});
+    
+    		
+    		
+    	
 
     	// add triggers for the item names
     	final ItemCollection items = new ItemCollection();
@@ -342,9 +366,34 @@ public class FruitsForCoralia extends AbstractQuest {
     				ConversationStates.ATTENDING));
     	}
     }
+    	
+    	private void verifyEverything(final Player player, final EventRaiser npc, ChatAction completeAction) {
+    		final String quest= player.getQuest(QUEST_SLOT);
+    		final ItemCollection list= new ItemCollection();
+    		list.addFromQuestStateString(quest);
+//    		new  MultipleActions(
+//    				new SetQuestAction(QUEST_SLOT, "done"),
+//    				new SayTextAction("My hat has never looked so delightful! Thank you ever so much! Here, take this as a reward."),
+//    				new IncreaseXPAction(300),
+//    				new IncreaseKarmaAction(5),
+//    				new EquipRandomAmountOfItemAction("crepes suzette", 1, 5),
+//    				new EquipRandomAmountOfItemAction("minor potion", 2, 8),
+//    				new SetQuestToTimeStampAction(QUEST_SLOT, 1)
+//    			); to be added when complete action needed
+    		for (final Map.Entry<String, Integer> e : list.entrySet()) {
+    			new CollectRequestedItemsAction(e.getKey(), QUEST_SLOT, 
+    					"I still need some more, you did not have everything", "",
+    					completeAction,
+    					ConversationStates.ATTENDING).fire(player, null, npc);}
+    		
+    	}
+    
 
 	@Override
 	public String getNPCName() {
 		return "Coralia";
 	}
+	
+	
+
 }
