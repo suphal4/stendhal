@@ -12,83 +12,45 @@
  ***************************************************************************/
 package games.stendhal.server.maps.quests;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-import static utilities.SpeakerNPCTestHelper.getReply;
 
-import java.util.LinkedList;
-import java.util.List;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import games.stendhal.server.entity.Entity;
 import games.stendhal.server.core.engine.SingletonRepository;
 import games.stendhal.server.core.engine.StendhalRPZone;
-import games.stendhal.server.entity.item.Item;
-import games.stendhal.server.entity.mapstuff.portal.HousePortal;
-import games.stendhal.server.entity.mapstuff.portal.Portal;
 import games.stendhal.server.entity.npc.SpeakerNPC;
 import games.stendhal.server.entity.npc.fsm.Engine;
 import games.stendhal.server.entity.player.Player;
-import games.stendhal.server.maps.MockStendlRPWorld;
 import games.stendhal.server.maps.semos.wizardstower.WizardsGuardStatueNPC;
 import utilities.PlayerTestHelper;
 import utilities.QuestHelper;
-import utilities.ZonePlayerAndNPCTestImpl;
-import utilities.RPClass.EntityTestHelper;
-import utilities.RPClass.PortalTestHelper;
 
-
-public class ZekielsPracticeTestTest extends ZonePlayerAndNPCTestImpl{
+public class ZekielsPracticeTestTest{
 	private static final int REQUIRED_IRON = 2;
 	private static final int REQUIRED_BEESWAX = 6;
 	
 	private Player player = null;
 	private SpeakerNPC npc = null;
 	private Engine en = null;
-	private static final String ZONE_NAME = "int_semos_wizards_tower_basement";
-	private static final String ZONE_NAME1 = "int_semos_wizards_tower_1";
-	private static final String ZONE_NAME2 = "int_semos_wizards_tower_2";
-	private static final String ZONE_NAME3 = "int_semos_wizards_tower_3";
-	private static final String ZONE_NAME4 = "int_semos_wizards_tower_4";
-	private static final String ZONE_NAME5 = "int_semos_wizards_tower_5";
-	private static final String ZONE_NAME6 = "int_semos_wizards_tower_6";
-	private static final String ZONE_NAME7 = "int_semos_wizards_tower_7";
-	private static final String ZONE_NAME8 = "int_semos_wizards_tower_8";
-	private static final String ZONE_NAME9 = "int_semos_wizards_tower_9";
 	
-	private LinkedList<HousePortal> portals = new LinkedList<HousePortal>();
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 		QuestHelper.setUpBeforeClass();
-		HousePortal.generateRPClass();
-		setupZone(ZONE_NAME);
-		setupZone(ZONE_NAME1);
-		setupZone(ZONE_NAME2);
-		setupZone(ZONE_NAME3);
-		setupZone(ZONE_NAME4);
-		setupZone(ZONE_NAME5);
-		setupZone(ZONE_NAME6);
-		setupZone(ZONE_NAME7);
 		
 	}
 
-	@Override
 	@Before
-	public void setUp() throws Exception{
-		super.setUp();
+	public void setUp(){
 		final StendhalRPZone zone = new StendhalRPZone("admin_test");
 
 		new WizardsGuardStatueNPC().configureZone(zone, null);
 		
-		quest = new ZekielsPracticalTestQuest();
+		AbstractQuest quest = new ZekielsPracticalTestQuest();
 		quest.addToWorld();
-		
-		
 		
 		
 		//
@@ -138,7 +100,7 @@ public class ZekielsPracticeTestTest extends ZonePlayerAndNPCTestImpl{
 		
 		en.step(player, "/use #12");
 		PlayerTestHelper.equipWithStackableItem(player, "candle", 2);
-		en.step(player, "/use #15"); //go to 3rd floor
+		en.step(player, "/use #14"); //go to 3rd floor
 		assertFalse(player.isEquipped("candle"));
 }
 	
