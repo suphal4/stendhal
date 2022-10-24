@@ -25,7 +25,7 @@ import games.stendhal.server.entity.CollisionAction;
 import games.stendhal.server.entity.npc.SpeakerNPC;
 
 /**
- * Builds a npc in Ados (name:Florence Boullabaisse) who is a fish soup maker on the market
+ * Builds a npc in Ados (name:Florence Bouillabaisse) who is a fish soup maker on the market
  *
  * @author Krupi (fish soup idea) Vanessa Julius (implemented)
  *
@@ -38,7 +38,7 @@ public class FishSoupMakerNPC implements ZoneConfigurator {
 	}
 
 	private void buildNPC(final StendhalRPZone zone) {
-		final SpeakerNPC npc = new SpeakerNPC("Florence Boullabaisse") {
+		final SpeakerNPC npc = new SpeakerNPC("Florence Bouillabaisse") {
 
 			@Override
 			protected void createPath() {
@@ -68,7 +68,7 @@ public class FishSoupMakerNPC implements ZoneConfigurator {
 			}
 		};
 
-		npc.setDescription("You see Florence Boullabaisse. She is an excellent soup chef.");
+		npc.setDescription("You see Florence Bouillabaisse. She is an excellent soup chef.");
 		npc.setEntityClass("fishsoupmakernpc");
 		npc.setPosition(63, 14);
 		npc.setCollisionAction(CollisionAction.STOP);
