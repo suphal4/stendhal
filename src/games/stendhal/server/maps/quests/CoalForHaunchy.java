@@ -43,6 +43,7 @@ import games.stendhal.server.entity.npc.condition.TimePassedCondition;
 import games.stendhal.server.entity.player.Player;
 import games.stendhal.server.maps.Region;
 
+
 /**
  * QUEST: Coal for Haunchy
  *
@@ -145,19 +146,46 @@ public class CoalForHaunchy extends AbstractQuest {
 	private void bringCoalStep() {
 		final SpeakerNPC npc = npcs.get("Haunchy Meatoch");
 
-		final List<String> triggers = new ArrayList<String>();
-		triggers.add("coal");
-		triggers.add("stone coal");
-		triggers.addAll(ConversationPhrases.QUEST_MESSAGES);
-
+		final List<String> triggers1 = new ArrayList<String>();
+		triggers1.add("coal");
+		triggers1.add("stone coal");
+		triggers1.addAll(ConversationPhrases.QUEST_MESSAGES);
 		// player asks about quest or says coal when they are supposed to bring some coal and they have it
 		npc.add(
-				ConversationStates.ATTENDING, triggers,
+				ConversationStates.ATTENDING, triggers1,
 				new AndCondition(new QuestInStateCondition(QUEST_SLOT, "start"), new PlayerHasItemWithHimCondition("coal",25)),
 				ConversationStates.ATTENDING,
 				null,
 				new MultipleActions(
 						new DropItemAction("coal",25),
+//						new DropItemAction("charcoal",25),
+						new IncreaseXPAction(200),
+						new IncreaseKarmaAction(20),
+						new ChatAction() {
+							@Override
+							public void fire(final Player player,
+									final Sentence sentence,
+									final EventRaiser npc) {
+								int grilledsteakAmount = Rand.rand(4) + 1;
+								new EquipItemAction("grilled steak", grilledsteakAmount, true).fire(player, sentence, npc);
+								npc.say("Thank you!! Take " + Grammar.thisthese(grilledsteakAmount) + " " +
+										Grammar.quantityNumberStrNoun(grilledsteakAmount, "grilled steak") + " from my grill!");
+								new SetQuestAndModifyKarmaAction(getSlotName(), "waiting;"
+										+ System.currentTimeMillis(), 10.0).fire(player, sentence, npc);
+							}
+						}));
+
+		final List<String> triggers2 = new ArrayList<String>();
+		triggers2.add("charcoal");
+	
+		npc.add(
+				ConversationStates.ATTENDING, triggers2,
+				new AndCondition(new QuestInStateCondition(QUEST_SLOT, "start"), new PlayerHasItemWithHimCondition("charcoal",25)),
+				ConversationStates.ATTENDING,
+				null,
+				new MultipleActions(
+//						new DropItemAction("coal",25),
+						new DropItemAction("charcoal",25),
 						new IncreaseXPAction(200),
 						new IncreaseKarmaAction(20),
 						new ChatAction() {
@@ -176,7 +204,7 @@ public class CoalForHaunchy extends AbstractQuest {
 
 		// player asks about quest or says coal when they are supposed to bring some coal and they don't have it
 		npc.add(
-				ConversationStates.ATTENDING, triggers,
+				ConversationStates.ATTENDING, triggers1,
 				new AndCondition(new QuestInStateCondition(QUEST_SLOT, "start"), new NotCondition(new PlayerHasItemWithHimCondition("coal",25))),
 				ConversationStates.ATTENDING,
 				"You don't have the coal amount which I need yet. Go and pick some more pieces up, please.",
@@ -185,6 +213,19 @@ public class CoalForHaunchy extends AbstractQuest {
 		npc.add(
 				ConversationStates.ATTENDING,
 				Arrays.asList("coal","stone coal"),
+				new QuestNotInStateCondition(QUEST_SLOT,"start"),
+				ConversationStates.ATTENDING,
+				"Sometime you could do me a #favour ...", null);
+		npc.add(
+				ConversationStates.ATTENDING, triggers2,
+				new AndCondition(new QuestInStateCondition(QUEST_SLOT, "start"), new NotCondition(new PlayerHasItemWithHimCondition("charcoal",25))),
+				ConversationStates.ATTENDING,
+				"You don't have the coal amount which I need yet. Go and pick some more pieces up, please.",
+				null);
+
+		npc.add(
+				ConversationStates.ATTENDING,
+				Arrays.asList("charcoal"),
 				new QuestNotInStateCondition(QUEST_SLOT,"start"),
 				ConversationStates.ATTENDING,
 				"Sometime you could do me a #favour ...", null);
@@ -259,3 +300,4 @@ public class CoalForHaunchy extends AbstractQuest {
 		return "Haunchy Meatoch";
 	}
 }
+
