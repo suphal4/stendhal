@@ -276,7 +276,7 @@ public class ZekielsPracticalTestQuest extends AbstractQuest {
 
 		// NOTE: this is a different NPC from Zekiel the guardian used above. This one 'finishes' the quest
 		// and is in int_semos_wizards_tower_7, not the basement.
-		final SpeakerNPC npc = npcs.get("Zekiel");
+		final SpeakerNPC npc = npcs.get("Zekiel the guardian");
 
 		// player got to the last level of the tower
 		npc.add(ConversationStates.IDLE,
