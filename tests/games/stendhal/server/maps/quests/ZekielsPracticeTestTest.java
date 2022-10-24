@@ -119,4 +119,158 @@ public class ZekielsPracticeTestTest extends ZonePlayerAndNPCTestImpl{
 
 }
 	
+
+	@Test
+	public void enter3rdFloorWithNoCandlesTest() {
+		player = PlayerTestHelper.createPlayer("bob");
+		final Engine en = npc.getEngine();
+		// set quest to "start"
+
+		en.step(player, "hi");
+		en.step(player, "quest");
+		PlayerTestHelper.equipWithStackableItem(player, "iron", REQUIRED_IRON);
+		PlayerTestHelper.equipWithStackableItem(player, "beeswax", REQUIRED_BEESWAX);
+		en.step(player, "hi");
+		en.step(player, "start");
+		en.step(player, "send");
+		en.step(player, "/use #12");
+		en.step(player, "/use #15"); //go to 2nd floor
+		
+		en.step(player, "/use #12");
+		PlayerTestHelper.equipWithStackableItem(player, "candle", 2);
+		en.step(player, "/use #15"); //go to 3rd floor
+		assertFalse(player.isEquipped("candle"));
+}
+	
+	@Test
+	public void enter4thFloorWithNoCandlesTest() {
+		player = PlayerTestHelper.createPlayer("bob");
+		final Engine en = npc.getEngine();
+		// set quest to "start"
+
+		en.step(player, "hi");
+		en.step(player, "quest");
+		PlayerTestHelper.equipWithStackableItem(player, "iron", REQUIRED_IRON);
+		PlayerTestHelper.equipWithStackableItem(player, "beeswax", REQUIRED_BEESWAX);
+		en.step(player, "hi");
+		en.step(player, "start");
+		en.step(player, "send");
+		en.step(player, "/use #12");
+		en.step(player, "/use #15"); //go to 2nd floor
+		
+		en.step(player, "/use #12");
+		PlayerTestHelper.equipWithStackableItem(player, "candle", 2);
+		en.step(player, "/use #15"); //go to 3rd floor
+		
+		en.step(player, "/use #12");
+		PlayerTestHelper.equipWithStackableItem(player, "candle", 2);
+		en.step(player, "/use #15"); //go to 4th floor
+		assertFalse(player.isEquipped("candle"));
+
+}
+	
+	@Test
+	public void enter5thFloorWithNoCandlesTest() {
+		player = PlayerTestHelper.createPlayer("bob");
+		final Engine en = npc.getEngine();
+		// set quest to "start"
+
+		en.step(player, "hi");
+		en.step(player, "quest");
+		PlayerTestHelper.equipWithStackableItem(player, "iron", REQUIRED_IRON);
+		PlayerTestHelper.equipWithStackableItem(player, "beeswax", REQUIRED_BEESWAX);
+		en.step(player, "hi");
+		en.step(player, "start");
+		en.step(player, "send");
+		en.step(player, "/use #12");
+		en.step(player, "/use #15"); //go to 2nd floor
+		
+		en.step(player, "/use #12");
+		PlayerTestHelper.equipWithStackableItem(player, "candle", 2);
+		en.step(player, "/use #15"); //go to 3rd floor
+		
+		en.step(player, "/use #12");
+		PlayerTestHelper.equipWithStackableItem(player, "candle", 2);
+		en.step(player, "/use #15"); //go to 4th floor
+		
+		en.step(player, "/use #12");
+		PlayerTestHelper.equipWithStackableItem(player, "candle", 2);
+		en.step(player, "/use #15"); //go to 5th floor
+		assertFalse(player.isEquipped("candle"));
+
+}
+	
+	@Test
+	public void enter6thFloorWithNoCandlesTest() {
+		player = PlayerTestHelper.createPlayer("bob");
+		final Engine en = npc.getEngine();
+		// set quest to "start"
+
+		en.step(player, "hi");
+		en.step(player, "quest");
+		PlayerTestHelper.equipWithStackableItem(player, "iron", REQUIRED_IRON);
+		PlayerTestHelper.equipWithStackableItem(player, "beeswax", REQUIRED_BEESWAX);
+		en.step(player, "hi");
+		en.step(player, "start");
+		en.step(player, "send");
+		en.step(player, "/use #12");
+		en.step(player, "/use #15"); //go to 2nd floor
+		
+		en.step(player, "/use #12");
+		PlayerTestHelper.equipWithStackableItem(player, "candle", 2);
+		en.step(player, "/use #15"); //go to 3rd floor
+		
+		en.step(player, "/use #12");
+		PlayerTestHelper.equipWithStackableItem(player, "candle", 2);
+		en.step(player, "/use #15"); //go to 4th floor
+		
+		en.step(player, "/use #12");
+		PlayerTestHelper.equipWithStackableItem(player, "candle", 2);
+		en.step(player, "/use #15"); //go to 5th floor
+		
+		en.step(player, "/use #12");
+		PlayerTestHelper.equipWithStackableItem(player, "candle", 2);
+		en.step(player, "/use #15"); //go to 6th floor
+		assertFalse(player.isEquipped("candle"));
+
+}
+	@Test
+	public void enterSpireWithNoCandlesTest() {
+		player = PlayerTestHelper.createPlayer("bob");
+		final Engine en = npc.getEngine();
+		// set quest to "start"
+
+		en.step(player, "hi");
+		en.step(player, "quest");
+		PlayerTestHelper.equipWithStackableItem(player, "iron", REQUIRED_IRON);
+		PlayerTestHelper.equipWithStackableItem(player, "beeswax", REQUIRED_BEESWAX);
+		en.step(player, "hi");
+		en.step(player, "start");
+		en.step(player, "send");
+		en.step(player, "/use #12");
+		en.step(player, "/use #15"); //go to 2nd floor
+		
+		en.step(player, "/use #12");
+		PlayerTestHelper.equipWithStackableItem(player, "candle", 2);
+		en.step(player, "/use #15"); //go to 3rd floor
+		en.step(player, "/use #12");
+		PlayerTestHelper.equipWithStackableItem(player, "candle", 2);
+		en.step(player, "/use #15"); //go to 4th floor
+		
+		en.step(player, "/use #12");
+		PlayerTestHelper.equipWithStackableItem(player, "candle", 2);
+		en.step(player, "/use #15"); //go to 5th floor
+		
+		en.step(player, "/use #12");
+		PlayerTestHelper.equipWithStackableItem(player, "candle", 2);
+		en.step(player, "/use #15"); //go to 6th floor
+		
+		en.step(player, "/use #12");
+		PlayerTestHelper.equipWithStackableItem(player, "candle", 2);
+		en.step(player, "/use #15"); //go to spire
+		assertFalse(player.isEquipped("candle"));
+
+}
+	
+	
 }
