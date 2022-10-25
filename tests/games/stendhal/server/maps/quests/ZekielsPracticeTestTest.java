@@ -12,8 +12,10 @@
  ***************************************************************************/
 package games.stendhal.server.maps.quests;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-
+import static org.junit.Assert.assertTrue;
+import static utilities.SpeakerNPCTestHelper.getReply;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -55,44 +57,66 @@ public class ZekielsPracticeTestTest{
 		
 		//
 		}
+	@Test
+	public void enterFloorWithNoCandlesTest() {
+		player = PlayerTestHelper.createPlayer("bob");
+		final SpeakerNPC npc = SingletonRepository.getNPCList().get("Zekiel the guardian");	
+		Engine en = npc.getEngine();
+		
+		
+		 
+		
+	}
+	
 
 	@Test
 	public void enter2ndFloorWithNoCandlesTest() {
 		player = PlayerTestHelper.createPlayer("bob");
 		final SpeakerNPC npc = SingletonRepository.getNPCList().get("Zekiel the guardian");	
-		final Engine en = npc.getEngine();
+		 Engine en = npc.getEngine();
 		// set quest to "start"
 
 		en.step(player, "hi");
+		assertEquals("Greetings Stranger! I am Zekiel the #guardian.", getReply(npc));
+		en.step(player, "test");
+		assertEquals("The practical test will be your #quest from me.", getReply(npc));
 		en.step(player, "quest");
+		assertEquals("First you need six magic candles. Bring me six pieces of #beeswax and two pieces of #iron, then I will summon the candles for you. After this you can start the practical test.", getReply(npc));
+		en.step(player, "bye");
+		assertEquals("So long!", getReply(npc));
+		
 		PlayerTestHelper.equipWithStackableItem(player, "iron", REQUIRED_IRON);
 		PlayerTestHelper.equipWithStackableItem(player, "beeswax", REQUIRED_BEESWAX);
+		
 		en.step(player, "hi");
-		en.step(player, "start");
+		assertEquals("Greetings, finally you have brought me all ingredients that I need to summon the magic candles. Now you can #start with the practical test.", getReply(npc));
 		en.step(player, "send");
+
+		player.setPosition(25,15);
 		en.step(player, "/use #12");
 		PlayerTestHelper.equipWithStackableItem(player, "candle", 2);
-	
-		//check if when player goes over sparkly section, candles in bag empty
+		assertTrue(player.isEquipped("candle"));
+		//check if when player goes over sparkely section, candles in bag empty
 		en.step(player, "/use #15");
 		assertFalse(player.isEquipped("candle"));
-		
-	
-
 }
 	
 
 	@Test
 	public void enter3rdFloorWithNoCandlesTest() {
 		player = PlayerTestHelper.createPlayer("bob");
-		final Engine en = npc.getEngine();
+		final SpeakerNPC npc = SingletonRepository.getNPCList().get("Zekiel the guardian");	
+		Engine en = npc.getEngine();
 		// set quest to "start"
 
 		en.step(player, "hi");
 		en.step(player, "quest");
+		en.step(player, "bye");
 		PlayerTestHelper.equipWithStackableItem(player, "iron", REQUIRED_IRON);
 		PlayerTestHelper.equipWithStackableItem(player, "beeswax", REQUIRED_BEESWAX);
+		
 		en.step(player, "hi");
+		
 		en.step(player, "start");
 		en.step(player, "send");
 		en.step(player, "/use #12");
@@ -107,16 +131,27 @@ public class ZekielsPracticeTestTest{
 	@Test
 	public void enter4thFloorWithNoCandlesTest() {
 		player = PlayerTestHelper.createPlayer("bob");
-		final Engine en = npc.getEngine();
+		final SpeakerNPC npc = SingletonRepository.getNPCList().get("Zekiel the guardian");	
+		Engine en = npc.getEngine();
 		// set quest to "start"
 
 		en.step(player, "hi");
+		assertEquals("", getReply(npc));
+		en.step(player, "test");
+		assertEquals("", getReply(npc));
 		en.step(player, "quest");
+		assertEquals("", getReply(npc));
+		en.step(player, "bye");
+		assertEquals("", getReply(npc));
 		PlayerTestHelper.equipWithStackableItem(player, "iron", REQUIRED_IRON);
 		PlayerTestHelper.equipWithStackableItem(player, "beeswax", REQUIRED_BEESWAX);
+	
 		en.step(player, "hi");
+		assertEquals("", getReply(npc));
 		en.step(player, "start");
+		assertEquals("", getReply(npc));
 		en.step(player, "send");
+		assertEquals("", getReply(npc));
 		en.step(player, "/use #12");
 		en.step(player, "/use #15"); //go to 2nd floor
 		
@@ -134,13 +169,16 @@ public class ZekielsPracticeTestTest{
 	@Test
 	public void enter5thFloorWithNoCandlesTest() {
 		player = PlayerTestHelper.createPlayer("bob");
-		final Engine en = npc.getEngine();
+		final SpeakerNPC npc = SingletonRepository.getNPCList().get("Zekiel the guardian");	
+		
+		Engine en = npc.getEngine();
 		// set quest to "start"
 
 		en.step(player, "hi");
 		en.step(player, "quest");
 		PlayerTestHelper.equipWithStackableItem(player, "iron", REQUIRED_IRON);
 		PlayerTestHelper.equipWithStackableItem(player, "beeswax", REQUIRED_BEESWAX);
+		en.step(player, "bye");
 		en.step(player, "hi");
 		en.step(player, "start");
 		en.step(player, "send");
@@ -165,14 +203,21 @@ public class ZekielsPracticeTestTest{
 	@Test
 	public void enter6thFloorWithNoCandlesTest() {
 		player = PlayerTestHelper.createPlayer("bob");
-		final Engine en = npc.getEngine();
+		final SpeakerNPC npc = SingletonRepository.getNPCList().get("Zekiel the guardian");	
+		
+		Engine en = npc.getEngine();
 		// set quest to "start"
 
 		en.step(player, "hi");
 		en.step(player, "quest");
+		
+		en.step(player, "bye");
+		
 		PlayerTestHelper.equipWithStackableItem(player, "iron", REQUIRED_IRON);
 		PlayerTestHelper.equipWithStackableItem(player, "beeswax", REQUIRED_BEESWAX);
+		
 		en.step(player, "hi");
+		
 		en.step(player, "start");
 		en.step(player, "send");
 		en.step(player, "/use #12");
@@ -199,7 +244,9 @@ public class ZekielsPracticeTestTest{
 	@Test
 	public void enterSpireWithNoCandlesTest() {
 		player = PlayerTestHelper.createPlayer("bob");
-		final Engine en = npc.getEngine();
+		final SpeakerNPC npc = SingletonRepository.getNPCList().get("Zekiel the guardian");	
+		
+		Engine en = npc.getEngine();
 		// set quest to "start"
 
 		en.step(player, "hi");
