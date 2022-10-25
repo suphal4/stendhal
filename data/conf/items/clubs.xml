@@ -271,7 +271,7 @@
     <attributes>
       <atk value="100"/>
       <def value="100"/>
-      <rate value="2"/>
+      <rate value="10"/>
     <min_level condition="stendhal.testserver" value="0"/>
     </attributes>
     <weight value="0.01"/>
