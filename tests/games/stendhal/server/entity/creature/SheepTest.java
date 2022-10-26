@@ -21,6 +21,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import games.stendhal.common.Direction;
 import games.stendhal.server.core.engine.SingletonRepository;
 import games.stendhal.server.core.engine.StendhalRPZone;
 import games.stendhal.server.entity.mapstuff.spawner.SheepFood;
@@ -308,5 +309,29 @@ public class SheepTest {
 		meh.eat(food);
 		assertEquals(100, meh.getWeight());
 	}
+	@Test
+	public void testPetMovement() {
+		//put the zone generation here ig lol
+		//we wan the sheep and the player to be next to each other and far enough away from zone boundary that it takes 5 second to walk to it
+		final Player frank = PlayerTestHelper.createPlayer("frank");
+		final StendhalRPZone zone = new StendhalRPZone("testzone", 100, 100);
+		zone.add(frank);
+		final Sheep myBoy = new Sheep(frank);
+		frank.setDirection(Direction.RIGHT);
+		frank.setSpeed(frank.getBaseSpeed());
+		try {
+		    Thread.sleep(5000);
+		    
+		} catch (InterruptedException ie) {
+		    Thread.currentThread().interrupt();
+		    System.out.println("hi");
+		}
+		frank.setSpeed(0);
+		frank.setDirection(Direction.STOP);
+		int distanceX = frank.getX()- myBoy.getX();
+		int distanceY = frank.getY() -myBoy.getY();
+		double distance = Math.sqrt((distanceX*distanceX)+(distanceY*distanceY));
+		assertTrue(distance<4);
+		}
 
 }
