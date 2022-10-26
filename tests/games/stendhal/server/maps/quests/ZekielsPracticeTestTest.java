@@ -13,9 +13,8 @@
 package games.stendhal.server.maps.quests;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 import static utilities.SpeakerNPCTestHelper.getReply;
+
 
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -29,11 +28,12 @@ import games.stendhal.server.entity.player.Player;
 import games.stendhal.server.maps.semos.wizardstower.WizardsGuardStatueNPC;
 import utilities.PlayerTestHelper;
 import utilities.QuestHelper;
+import utilities.ZonePlayerAndNPCTestImpl;
 
-public class ZekielsPracticeTestTest{
+public class ZekielsPracticeTestTest  extends ZonePlayerAndNPCTestImpl{
 	private static final int REQUIRED_IRON = 2;
 	private static final int REQUIRED_BEESWAX = 6;
-	
+	private static final String quest_slot= "zekiels_practical_test";
 	private Player player = null;
 	private SpeakerNPC npc = null;
 	private Engine en = null;
@@ -58,24 +58,11 @@ public class ZekielsPracticeTestTest{
 		//
 		}
 	@Test
-	public void enterFloorWithNoCandlesTest() {
+	public void allowToDrop() {
 		player = PlayerTestHelper.createPlayer("bob");
 		final SpeakerNPC npc = SingletonRepository.getNPCList().get("Zekiel the guardian");	
 		Engine en = npc.getEngine();
 		
-		
-		 
-		
-	}
-	
-
-	@Test
-	public void enter2ndFloorWithNoCandlesTest() {
-		player = PlayerTestHelper.createPlayer("bob");
-		final SpeakerNPC npc = SingletonRepository.getNPCList().get("Zekiel the guardian");	
-		 Engine en = npc.getEngine();
-		// set quest to "start"
-
 		en.step(player, "hi");
 		assertEquals("Greetings Stranger! I am Zekiel the #guardian.", getReply(npc));
 		en.step(player, "test");
@@ -91,195 +78,11 @@ public class ZekielsPracticeTestTest{
 		en.step(player, "hi");
 		assertEquals("Greetings, finally you have brought me all ingredients that I need to summon the magic candles. Now you can #start with the practical test.", getReply(npc));
 		en.step(player, "send");
-
-		player.setPosition(25,15);
-		en.step(player, "/use #12");
-		PlayerTestHelper.equipWithStackableItem(player, "candle", 2);
-		assertTrue(player.isEquipped("candle"));
-		//check if when player goes over sparkely section, candles in bag empty
-		en.step(player, "/use #15");
-		assertFalse(player.isEquipped("candle"));
-}
+		
+		assertEquals("Don't you dare drop any items until you have reached the top of the tower!", getReply(npc));
+		
+		
+	}
 	
 
-	@Test
-	public void enter3rdFloorWithNoCandlesTest() {
-		player = PlayerTestHelper.createPlayer("bob");
-		final SpeakerNPC npc = SingletonRepository.getNPCList().get("Zekiel the guardian");	
-		Engine en = npc.getEngine();
-		// set quest to "start"
-
-		en.step(player, "hi");
-		en.step(player, "quest");
-		en.step(player, "bye");
-		PlayerTestHelper.equipWithStackableItem(player, "iron", REQUIRED_IRON);
-		PlayerTestHelper.equipWithStackableItem(player, "beeswax", REQUIRED_BEESWAX);
-		
-		en.step(player, "hi");
-		
-		en.step(player, "start");
-		en.step(player, "send");
-		en.step(player, "/use #12");
-		en.step(player, "/use #15"); //go to 2nd floor
-		
-		en.step(player, "/use #12");
-		PlayerTestHelper.equipWithStackableItem(player, "candle", 2);
-		en.step(player, "/use #14"); //go to 3rd floor
-		assertFalse(player.isEquipped("candle"));
-}
-	
-	@Test
-	public void enter4thFloorWithNoCandlesTest() {
-		player = PlayerTestHelper.createPlayer("bob");
-		final SpeakerNPC npc = SingletonRepository.getNPCList().get("Zekiel the guardian");	
-		Engine en = npc.getEngine();
-		// set quest to "start"
-
-		en.step(player, "hi");
-		assertEquals("", getReply(npc));
-		en.step(player, "test");
-		assertEquals("", getReply(npc));
-		en.step(player, "quest");
-		assertEquals("", getReply(npc));
-		en.step(player, "bye");
-		assertEquals("", getReply(npc));
-		PlayerTestHelper.equipWithStackableItem(player, "iron", REQUIRED_IRON);
-		PlayerTestHelper.equipWithStackableItem(player, "beeswax", REQUIRED_BEESWAX);
-	
-		en.step(player, "hi");
-		assertEquals("", getReply(npc));
-		en.step(player, "start");
-		assertEquals("", getReply(npc));
-		en.step(player, "send");
-		assertEquals("", getReply(npc));
-		en.step(player, "/use #12");
-		en.step(player, "/use #15"); //go to 2nd floor
-		
-		en.step(player, "/use #12");
-		PlayerTestHelper.equipWithStackableItem(player, "candle", 2);
-		en.step(player, "/use #15"); //go to 3rd floor
-		
-		en.step(player, "/use #12");
-		PlayerTestHelper.equipWithStackableItem(player, "candle", 2);
-		en.step(player, "/use #15"); //go to 4th floor
-		assertFalse(player.isEquipped("candle"));
-
-}
-	
-	@Test
-	public void enter5thFloorWithNoCandlesTest() {
-		player = PlayerTestHelper.createPlayer("bob");
-		final SpeakerNPC npc = SingletonRepository.getNPCList().get("Zekiel the guardian");	
-		
-		Engine en = npc.getEngine();
-		// set quest to "start"
-
-		en.step(player, "hi");
-		en.step(player, "quest");
-		PlayerTestHelper.equipWithStackableItem(player, "iron", REQUIRED_IRON);
-		PlayerTestHelper.equipWithStackableItem(player, "beeswax", REQUIRED_BEESWAX);
-		en.step(player, "bye");
-		en.step(player, "hi");
-		en.step(player, "start");
-		en.step(player, "send");
-		en.step(player, "/use #12");
-		en.step(player, "/use #15"); //go to 2nd floor
-		
-		en.step(player, "/use #12");
-		PlayerTestHelper.equipWithStackableItem(player, "candle", 2);
-		en.step(player, "/use #15"); //go to 3rd floor
-		
-		en.step(player, "/use #12");
-		PlayerTestHelper.equipWithStackableItem(player, "candle", 2);
-		en.step(player, "/use #15"); //go to 4th floor
-		
-		en.step(player, "/use #12");
-		PlayerTestHelper.equipWithStackableItem(player, "candle", 2);
-		en.step(player, "/use #15"); //go to 5th floor
-		assertFalse(player.isEquipped("candle"));
-
-}
-	
-	@Test
-	public void enter6thFloorWithNoCandlesTest() {
-		player = PlayerTestHelper.createPlayer("bob");
-		final SpeakerNPC npc = SingletonRepository.getNPCList().get("Zekiel the guardian");	
-		
-		Engine en = npc.getEngine();
-		// set quest to "start"
-
-		en.step(player, "hi");
-		en.step(player, "quest");
-		
-		en.step(player, "bye");
-		
-		PlayerTestHelper.equipWithStackableItem(player, "iron", REQUIRED_IRON);
-		PlayerTestHelper.equipWithStackableItem(player, "beeswax", REQUIRED_BEESWAX);
-		
-		en.step(player, "hi");
-		
-		en.step(player, "start");
-		en.step(player, "send");
-		en.step(player, "/use #12");
-		en.step(player, "/use #15"); //go to 2nd floor
-		
-		en.step(player, "/use #12");
-		PlayerTestHelper.equipWithStackableItem(player, "candle", 2);
-		en.step(player, "/use #15"); //go to 3rd floor
-		
-		en.step(player, "/use #12");
-		PlayerTestHelper.equipWithStackableItem(player, "candle", 2);
-		en.step(player, "/use #15"); //go to 4th floor
-		
-		en.step(player, "/use #12");
-		PlayerTestHelper.equipWithStackableItem(player, "candle", 2);
-		en.step(player, "/use #15"); //go to 5th floor
-		
-		en.step(player, "/use #12");
-		PlayerTestHelper.equipWithStackableItem(player, "candle", 2);
-		en.step(player, "/use #15"); //go to 6th floor
-		assertFalse(player.isEquipped("candle"));
-
-}
-	@Test
-	public void enterSpireWithNoCandlesTest() {
-		player = PlayerTestHelper.createPlayer("bob");
-		final SpeakerNPC npc = SingletonRepository.getNPCList().get("Zekiel the guardian");	
-		
-		Engine en = npc.getEngine();
-		// set quest to "start"
-
-		en.step(player, "hi");
-		en.step(player, "quest");
-		PlayerTestHelper.equipWithStackableItem(player, "iron", REQUIRED_IRON);
-		PlayerTestHelper.equipWithStackableItem(player, "beeswax", REQUIRED_BEESWAX);
-		en.step(player, "hi");
-		en.step(player, "start");
-		en.step(player, "send");
-		en.step(player, "/use #12");
-		en.step(player, "/use #15"); //go to 2nd floor
-		
-		en.step(player, "/use #12");
-		PlayerTestHelper.equipWithStackableItem(player, "candle", 2);
-		en.step(player, "/use #15"); //go to 3rd floor
-		en.step(player, "/use #12");
-		PlayerTestHelper.equipWithStackableItem(player, "candle", 2);
-		en.step(player, "/use #15"); //go to 4th floor
-		
-		en.step(player, "/use #12");
-		PlayerTestHelper.equipWithStackableItem(player, "candle", 2);
-		en.step(player, "/use #15"); //go to 5th floor
-		
-		en.step(player, "/use #12");
-		PlayerTestHelper.equipWithStackableItem(player, "candle", 2);
-		en.step(player, "/use #15"); //go to 6th floor
-		
-		en.step(player, "/use #12");
-		PlayerTestHelper.equipWithStackableItem(player, "candle", 2);
-		en.step(player, "/use #15"); //go to spire
-		assertFalse(player.isEquipped("candle"));
-
-}
-	
-	
 }

@@ -74,7 +74,7 @@ public class ZekielsPracticalTestQuest extends AbstractQuest {
 	private static final int REQUIRED_BEESWAX = 6;
 
 	private static final String QUEST_SLOT = "zekiels_practical_test";
-
+	
 	@Override
 	public String getSlotName() {
 		return QUEST_SLOT;
@@ -201,7 +201,8 @@ public class ZekielsPracticalTestQuest extends AbstractQuest {
 			ConversationStates.ATTENDING,
 			"Greetings! You have so far failed the practical test. Tell me, if you want me to #send you on it again " +
 			"right now, or if there is anything you want to #learn about it first.",
-			new SetQuestAction(QUEST_SLOT, "candles_done"));
+			new SetQuestAction(QUEST_SLOT, "candles_done")
+			);
 	}
 
 	private void practicalTestStep() {
@@ -258,6 +259,8 @@ public class ZekielsPracticalTestQuest extends AbstractQuest {
 			ConversationStates.ATTENDING,
 			"Before I can send you on the first step, you have to drop any candles you are carrying.",
 			null);
+		
+		
 
 		// send the player, so long as he doesn't not have candles, and record which step he is on
 		npc.add(ConversationStates.ATTENDING,
@@ -268,9 +271,12 @@ public class ZekielsPracticalTestQuest extends AbstractQuest {
 			ConversationStates.IDLE,
 			null,
 			new MultipleActions(
+					//new make new action for disable drop item
 					new SetQuestAction(QUEST_SLOT, "first_step"),
 					new TeleportAction("int_semos_wizards_tower_1", 15, 16, Direction.DOWN)));
 	}
+
+	
 
 	private void finishQuestStep() {
 
@@ -286,6 +292,7 @@ public class ZekielsPracticalTestQuest extends AbstractQuest {
 			ConversationStates.ATTENDING,
 			"Very well, adventurer! You have passed the practical test. You can now enter the spire whenever you want.",
 			new MultipleActions(
+					//new make new action for enabling drop item
 				new IncreaseXPAction(5000),
 				new IncreaseKarmaAction(10),
 				new SetQuestAction(QUEST_SLOT, "done")));
