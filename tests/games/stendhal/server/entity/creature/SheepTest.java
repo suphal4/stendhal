@@ -318,11 +318,15 @@ public class SheepTest {
 		zone.add(frank);
 		final Sheep myBoy = new Sheep(frank);
 		frank.setDirection(Direction.RIGHT);
+		frank.setSpeed(frank.getBaseSpeed());
 		try {
 		    Thread.sleep(5000);
+		    
 		} catch (InterruptedException ie) {
 		    Thread.currentThread().interrupt();
+		    System.out.println("hi");
 		}
+		frank.setSpeed(0);
 		frank.setDirection(Direction.STOP);
 		int distanceX = frank.getX()- myBoy.getX();
 		int distanceY = frank.getY() -myBoy.getY();

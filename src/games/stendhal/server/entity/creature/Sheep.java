@@ -135,7 +135,7 @@ public class Sheep extends DomesticAnimal {
 			// add sheep to zone and create RPID to be used in setSheep()
 			owner.getZone().add(this);
 			owner.setSheep(this);
-			this.baseSpeed= owner.getBaseSpeed();
+			//this.baseSpeed= owner.getBaseSpeed();
 		}
 
 		update();
