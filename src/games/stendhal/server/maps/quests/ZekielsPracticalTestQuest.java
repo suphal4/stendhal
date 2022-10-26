@@ -269,7 +269,7 @@ public class ZekielsPracticalTestQuest extends AbstractQuest {
 					new QuestInStateCondition(QUEST_SLOT,"candles_done"),
 					new NotCondition(new PlayerHasItemWithHimCondition("candle"))),
 			ConversationStates.IDLE,
-			null,
+			"Don't you dare drop any items until you have reached the top of the tower!",
 			new MultipleActions(
 					//new make new action for disable drop item
 					new SetQuestAction(QUEST_SLOT, "first_step"),
