@@ -653,8 +653,10 @@ Unfortunately I will not be able to visit Athor this year. I have run into a bit
   <!-- Interiors of the wizards tower -->
   <zone name="int_semos_wizards_tower_1" file="interiors/semos/wizards_tower_1.tmx">
     <configurator class-name="games.stendhal.server.core.config.zone.NoTeleportIn"/>
-    <configurator
-      class-name="games.stendhal.server.maps.semos.wizardstower.FirstFloorCreatures"/>
+    <configurator class-name="games.stendhal.server.maps.semos.wizardstower.FirstFloorCreatures"/>
+    <configurator class-name="games.stendhal.server.core.config.zone.NoItemMove">
+      <parameter name="message">No! Don't drop your items . You need to take your candle to the shimmery spot.</parameter>
+    </configurator>
 
     <entity x="15" y="15">
       <implementation
@@ -739,9 +741,11 @@ Unfortunately I will not be able to visit Athor this year. I have run into a bit
   <!-- Interiors of the wizards tower -->
   <zone name="int_semos_wizards_tower_2" file="interiors/semos/wizards_tower_2.tmx">
     <configurator class-name="games.stendhal.server.core.config.zone.NoTeleportIn"/>
-    <configurator
-      class-name="games.stendhal.server.maps.semos.wizardstower.SecondFloorCreatures"/>
-
+    <configurator class-name="games.stendhal.server.maps.semos.wizardstower.SecondFloorCreatures"/>
+	<configurator class-name="games.stendhal.server.core.config.zone.NoItemMove">
+      	<parameter name="message">No! Don't drop your items . You need to take your candle to the shimmery spot.</parameter>
+    </configurator>
+    
     <entity x="15" y="15">
       <implementation
         class-name="games.stendhal.server.entity.mapstuff.sound.BackgroundMusicSource">
@@ -812,8 +816,10 @@ Unfortunately I will not be able to visit Athor this year. I have run into a bit
   <!-- Interiors of the wizards tower -->
   <zone name="int_semos_wizards_tower_3" file="interiors/semos/wizards_tower_3.tmx">
     <configurator class-name="games.stendhal.server.core.config.zone.NoTeleportIn"/>
-    <configurator
-      class-name="games.stendhal.server.maps.semos.wizardstower.ThirdFloorCreatures"/>
+    <configurator class-name="games.stendhal.server.maps.semos.wizardstower.ThirdFloorCreatures"/>
+    <configurator class-name="games.stendhal.server.core.config.zone.NoItemMove">
+      <parameter name="message">No! Don't drop your items . You need to take your candle to the shimmery spot.</parameter>
+    </configurator>
 
     <entity x="15" y="15">
       <implementation
@@ -885,9 +891,10 @@ Unfortunately I will not be able to visit Athor this year. I have run into a bit
   <!-- Interiors of the wizards tower -->
   <zone name="int_semos_wizards_tower_4" file="interiors/semos/wizards_tower_4.tmx">
     <configurator class-name="games.stendhal.server.core.config.zone.NoTeleportIn"/>
-    <configurator
-      class-name="games.stendhal.server.maps.semos.wizardstower.FourthFloorCreatures"/>
-
+    <configurator class-name="games.stendhal.server.maps.semos.wizardstower.FourthFloorCreatures"/>
+<configurator class-name="games.stendhal.server.core.config.zone.NoItemMove">
+      <parameter name="message">No! Don't drop your items . You need to take your candle to the shimmery spot.</parameter>
+    </configurator>
     <entity x="15" y="15">
       <implementation
         class-name="games.stendhal.server.entity.mapstuff.sound.BackgroundMusicSource">
@@ -958,9 +965,10 @@ Unfortunately I will not be able to visit Athor this year. I have run into a bit
   <!-- Interiors of the wizards tower -->
   <zone name="int_semos_wizards_tower_5" file="interiors/semos/wizards_tower_5.tmx">
     <configurator class-name="games.stendhal.server.core.config.zone.NoTeleportIn"/>
-    <configurator
-      class-name="games.stendhal.server.maps.semos.wizardstower.FifthFloorCreatures"/>
-
+    <configurator class-name="games.stendhal.server.maps.semos.wizardstower.FifthFloorCreatures"/>
+	<configurator class-name="games.stendhal.server.core.config.zone.NoItemMove">
+      <parameter name="message">No! Don't drop your items . You need to take your candle to the shimmery spot.</parameter>
+    </configurator>
     <entity x="15" y="15">
       <implementation
         class-name="games.stendhal.server.entity.mapstuff.sound.BackgroundMusicSource">
@@ -1031,9 +1039,10 @@ Unfortunately I will not be able to visit Athor this year. I have run into a bit
   <!-- Interiors of the wizards tower -->
   <zone name="int_semos_wizards_tower_6" file="interiors/semos/wizards_tower_6.tmx">
     <configurator class-name="games.stendhal.server.core.config.zone.NoTeleportIn"/>
-    <configurator
-      class-name="games.stendhal.server.maps.semos.wizardstower.SixthFloorCreatures"/>
-
+    <configurator class-name="games.stendhal.server.maps.semos.wizardstower.SixthFloorCreatures"/>
+	<configurator class-name="games.stendhal.server.core.config.zone.NoItemMove">
+      <parameter name="message">No! Don't drop your items . You need to take your candle to the shimmery spot.</parameter>
+    </configurator>
     <entity x="15" y="15">
       <implementation
         class-name="games.stendhal.server.entity.mapstuff.sound.BackgroundMusicSource">
