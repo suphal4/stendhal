@@ -1,7 +1,15 @@
 Changelog
 ---------
 ---------
-
+1.40uom
+*world*
+- Haunchy now accepts coal as well as charcoal for the BBQ.
+- Sheep pet now moves as the same speed as the player.
+- NPC now accepts horse hair.
+- Disallows items to be dropped in wizard tower
+- Rod of the GM now has the attack rate 0f 10 so the Lieutenant now gives correct advice.
+- Coralia now gives the option to accpet everything
+- Corrected the spelling mistake for NPC Florence Boullabaisse
 
 1.40
 

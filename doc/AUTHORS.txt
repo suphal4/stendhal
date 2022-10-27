@@ -201,3 +201,17 @@ Notable contributors:
 - SnowFlake
   · Maps maker
   · NPCs
+  Ananta Kakkar
+  . Fixed Haunchy's charcoal bug
+  Juanita Emeh
+  . Fixed lieutenant drilenun bug
+  Eiji Miyamoto
+  . Fixed the horse hair bug
+  Suphal Sharma
+  . Fixed fish soup bug
+  John Charles Dean
+  . Fixed pet prevents bug
+  Adam-Zayd Saeed
+  . Fixed Coralia bug 
+  Rose Halsall (h5****rh)
+  . Fixed Zekiel bug
