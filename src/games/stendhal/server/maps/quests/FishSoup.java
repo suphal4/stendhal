@@ -45,9 +45,9 @@ import marauroa.common.game.IRPZone;
 /**
  * QUEST: Special Fish Soup.
  * <p>
- * PARTICIPANTS: <ul><li> Florence Bouillabaisse on Ados market</ul>
+ * PARTICIPANTS: <ul><li> Florence Boullabaisse on Ados market</ul>
  *
- * STEPS: <ul><li> Florence Bouillabaisse tells you the ingredients of a special fish soup <li> You
+ * STEPS: <ul><li> Florence Boullabaisse tells you the ingredients of a special fish soup <li> You
  * collect the ingredients <li> You bring the ingredients to Florence <li> The soup
  * is served at a market table<li> Eating the soup heals you fully over time <li> Making it adds karma
  * </ul>
@@ -122,7 +122,7 @@ public class FishSoup extends AbstractQuest {
 	}
 
 	private void step_1() {
-		final SpeakerNPC npc = npcs.get("Florence Bouillabaisse");
+		final SpeakerNPC npc = npcs.get("Florence Boullabaisse");
 
 		// player says hi before starting the quest
 		npc.add(
@@ -240,7 +240,7 @@ public class FishSoup extends AbstractQuest {
 	}
 
 	private void step_3() {
-		final SpeakerNPC npc = npcs.get("Florence Bouillabaisse");
+		final SpeakerNPC npc = npcs.get("Florence Boullabaisse");
 
 		// player returns while quest is still active
 		npc.add(
@@ -391,7 +391,7 @@ public class FishSoup extends AbstractQuest {
 	public void addToWorld() {
 		fillQuestInfo(
 				"Fish Soup",
-				"Florence Bouillabaisse makes a healthy and tasty fish soup, but it needs rather a lot of ingredients.",
+				"Florence Boullabaisse makes a healthy and tasty fish soup, but it needs rather a lot of ingredients.",
 				false);
 		step_1();
 		step_2();
@@ -432,6 +432,6 @@ public class FishSoup extends AbstractQuest {
 
 	@Override
 	public String getNPCName() {
-		return "Florence Bouillabaisse";
+		return "Florence Boullabaisse";
 	}
 }
