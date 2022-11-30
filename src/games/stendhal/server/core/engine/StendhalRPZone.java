@@ -60,6 +60,7 @@ import games.stendhal.server.entity.creature.Sheep;
 import games.stendhal.server.entity.item.Item;
 import games.stendhal.server.entity.mapstuff.area.WalkBlocker;
 import games.stendhal.server.entity.mapstuff.area.WalkBlockerFactory;
+import games.stendhal.server.entity.mapstuff.block.HandCart;
 import games.stendhal.server.entity.mapstuff.portal.OneWayPortalDestination;
 import games.stendhal.server.entity.mapstuff.portal.Portal;
 import games.stendhal.server.entity.mapstuff.spawner.CreatureRespawnPoint;
@@ -1974,5 +1975,15 @@ public class StendhalRPZone extends MarauroaRPZone {
 		}
 
 		return Arrays.asList(getAssociatedZones().split(","));
+	}
+	
+	public void addhandcart(HandCart h) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void addhandcart(HandCart h, boolean b) {
+		// TODO Auto-generated method stub
+		
 	}
 }
