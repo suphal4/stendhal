@@ -11,20 +11,17 @@
  *                                                                         *
  ***************************************************************************/
 package games.stendhal.server.entity.mapstuff.block;
-
+import games.stendhal.server.entity.player.Player;
+import games.stendhal.server.maps.MockStendlRPWorld;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-
 //import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
+import utilities.PlayerTestHelper;
 import games.stendhal.common.Direction;
 import games.stendhal.server.core.engine.StendhalRPZone;
-import games.stendhal.server.entity.player.Player;
-import games.stendhal.server.maps.MockStendlRPWorld;
-import utilities.PlayerTestHelper;
 import utilities.RPClass.BlockTestHelper;
 
 
@@ -40,10 +37,10 @@ public class HandCartTest {
 	@Test
 	public void pushTest() {
 		HandCart h = new HandCart(0,0);
-//		h.setThePosition(0,0);
 		StendhalRPZone zone = new StendhalRPZone("test", 10, 10);
+	
 		Player player = PlayerTestHelper.createPlayer("pusher player");
-		zone.addhandcart(h);
+		zone.add(h);
 		assertEquals(Integer.valueOf(0), Integer.valueOf(h.getX()));
 		assertEquals(Integer.valueOf(0), Integer.valueOf(h.getY()));
 		
@@ -91,7 +88,7 @@ public class HandCartTest {
 //		h.setThePosition(0,0);
 		StendhalRPZone zone = new StendhalRPZone("test", 10, 10);
 		Player player = PlayerTestHelper.createPlayer("pusher player");
-		zone.addhandcart(h, false);
+		zone.add(h, false);
 		
 		h.push(player, Direction.UP);
 		assertEquals(Integer.valueOf(1), Integer.valueOf(h.getY()));
@@ -101,7 +98,7 @@ public class HandCartTest {
 		//h doesn't move upwards any further if h2 is in its way
 		HandCart h2 = new HandCart(0,0);
 //		h2.setThePosition(0,2);
-		zone.addhandcart(h2, false);
+		zone.add(h2, false);
 		h.push(player, Direction.UP);
 		assertEquals(Integer.valueOf(1), Integer.valueOf(h.getY()));
 		
@@ -113,7 +110,7 @@ public class HandCartTest {
 //		h.setThePosition(0,0);
 		StendhalRPZone zone = new StendhalRPZone("test", 10, 10);
 		Player player = PlayerTestHelper.createPlayer("pusher player");
-		zone.addhandcart(h, false);
+		zone.add(h, false);
 		
 		assertFalse(h.isOpen());
 		h.open();

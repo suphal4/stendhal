@@ -1977,13 +1977,5 @@ public class StendhalRPZone extends MarauroaRPZone {
 		return Arrays.asList(getAssociatedZones().split(","));
 	}
 	
-	public void addhandcart(HandCart h) {
-		// TODO Auto-generated method stub
-		
-	}
 
-	public void addhandcart(HandCart h, boolean b) {
-		// TODO Auto-generated method stub
-		
-	}
 }
