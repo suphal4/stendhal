@@ -36,4 +36,20 @@ public class DisguiseTest{
 		//checks if frank is invisible
 		assertEquals(frank.isInvisibleToCreatures(),true);
 	}
+	@Test
+	
+	/*This test checks if the player is made invisible while wearing the elvish armor not in a nalwor zone
+	 * 
+	 * */
+	public void WearingArmorNotInNalworTest(){
+		final StendhalRPZone zone = new StendhalRPZone('0_semos_city');
+		//creates player frank and adds them to previously loaded zone
+		final Player frank = PlayerTestHelper.createPlayer("frank");
+		zone.add(frank);
+		//create a piece of elvish armor and equips it to frank
+		Item Armor= SingletonRepository.getEntityManager().getItem("elvish_armor");
+		frank.equip("armor", Armor);
+		//checks if frank is invisible
+		assertEquals(frank.isInvisibleToCreatures(),false);
+	}
 }
