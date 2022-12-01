@@ -16,7 +16,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import org.junit.After;
+//import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -37,8 +37,8 @@ public class HandCartTest {
 		
 	}
 
-	@After
-	public void pushTest() throws Exception {
+	@Test
+	public void pushTest() {
 		HandCart h = new HandCart(0,0);
 		h.setThePosition(0,0);
 		StendhalRPZone zone = new StendhalRPZone("test", 10, 10);
