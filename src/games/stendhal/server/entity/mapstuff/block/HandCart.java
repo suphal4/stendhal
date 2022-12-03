@@ -67,29 +67,19 @@ public class HandCart extends Chest implements ZoneEnterExitListener,
 	 *            RPObject
 	 */
 	
+	
+	//uses and adapts the block class to implement the moving handcart feature
 
 	public HandCart(int i, int j) {
-		// TODO Auto-generated constructor stub
+		sounds=null;
 		this.multi=true;
 		this.startX=i;
 		this.startY=j;
-		sounds=null;
+		this.setPosition(i, j);
+		
 	}
-//@Override 
-//	public int getX() {
-//		// TODO Auto-generated method stub
-//		return 0;
-//	}
-//@Override
-//	public int getY() {
-//		// TODO Auto-generated method stub
-//		return 0;
-//	}
-
-//	public void setThePosition(int i, int j) {
-//		// TODO Auto-generated method stub
-//		
-//	}
+	
+	
 	public void reset() {
 		wasMoved = false;
 		List<BlockTarget> blockTargetsAt = this.getZone().getEntitiesAt(getX(), getY(), BlockTarget.class);
@@ -104,11 +94,6 @@ public class HandCart extends Chest implements ZoneEnterExitListener,
 		if (!this.mayBePushed(d)) {
 			return;
 		}
-		// before push
-//		List<BlockTarget> blockTargetsAt = this.getZone().getEntitiesAt(getX(), getY(), BlockTarget.class);
-//		for (BlockTarget blockTarget : blockTargetsAt) {
-//			blockTarget.untrigger();
-//		}
 
 		// after push
 		int x = getXAfterPush(d);
@@ -277,32 +262,5 @@ public class HandCart extends Chest implements ZoneEnterExitListener,
 			SingletonRepository.getTurnNotifier().notifyInSeconds(RESET_AGAIN_DELAY, this);
 		}
 	}
-//	@Override
-//	public void update() {
-//		super.update();
-//		open = false;
-//		if (has("open")) {
-//			open = true;
-//		}
-//	}
-//
-//	public boolean isOpen() {
-//		// TODO Auto-generated method stub
-//		return open;
-//	}
-//
-//	public void open() {
-//		// TODO Auto-generated method stub
-//		this.open = true;
-//		put("open", "");
-//	}
-//	public void close() {
-//		this.open = false;
-//
-//		if (has("open")) {
-//			remove("open");
-//		}
-//	}
-
 
 }

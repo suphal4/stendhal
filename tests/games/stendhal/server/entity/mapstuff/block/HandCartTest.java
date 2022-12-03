@@ -37,36 +37,25 @@ public class HandCartTest {
 	@Test
 	public void pushTest() {
 		HandCart h = new HandCart(0,0);
+		
 		StendhalRPZone zone = new StendhalRPZone("test", 10, 10);
-	
+		
 		Player player = PlayerTestHelper.createPlayer("pusher player");
+		h.setPosition(0, 0);
 		zone.add(h);
 		assertEquals(Integer.valueOf(0), Integer.valueOf(h.getX()));
 		assertEquals(Integer.valueOf(0), Integer.valueOf(h.getY()));
-		
-		
+		//check if cart can be pushed, and coordinate value changes
 		h.push(player, Direction.RIGHT);
 		assertEquals(Integer.valueOf(1), Integer.valueOf(h.getX()));
 		assertEquals(Integer.valueOf(0), Integer.valueOf(h.getY()));
-
-		h.push(player, Direction.UP);
-		assertEquals(Integer.valueOf(1), Integer.valueOf(h.getX()));
-		assertEquals(Integer.valueOf(1), Integer.valueOf(h.getY()));
 		
-		h.push(player, Direction.LEFT);
-		assertEquals(Integer.valueOf(1), Integer.valueOf(h.getX()));
-		assertEquals(Integer.valueOf(0), Integer.valueOf(h.getY()));
-		
-		h.push(player, Direction.DOWN);
-		assertEquals(Integer.valueOf(0), Integer.valueOf(h.getX()));
-		assertEquals(Integer.valueOf(0), Integer.valueOf(h.getY()));
-		
+			
 	}
 
 	@Test
 	public final void coordsTest() {
 		HandCart h = new HandCart(0,0);
-//		h.setThePosition(0,0);
 		
 		assertEquals(Integer.valueOf(0), Integer.valueOf(h.getXAfterPush(Direction.UP)));
 		assertEquals(Integer.valueOf(-1), Integer.valueOf(h.getYAfterPush(Direction.UP)));
@@ -85,29 +74,28 @@ public class HandCartTest {
 	@Test
 	public final void collisionTest() {
 		HandCart h = new HandCart(0,0);
-//		h.setThePosition(0,0);
+		h.setPosition(0,0);
 		StendhalRPZone zone = new StendhalRPZone("test", 10, 10);
 		Player player = PlayerTestHelper.createPlayer("pusher player");
 		zone.add(h, false);
 		
-		h.push(player, Direction.UP);
-		assertEquals(Integer.valueOf(1), Integer.valueOf(h.getY()));
+		h.push(player, Direction.RIGHT);
+		assertEquals(Integer.valueOf(1), Integer.valueOf(h.getX()));
 
 		
 		//make collision happen
 		//h doesn't move upwards any further if h2 is in its way
 		HandCart h2 = new HandCart(0,0);
-//		h2.setThePosition(0,2);
+		h2.setPosition(2,0);
 		zone.add(h2, false);
-		h.push(player, Direction.UP);
-		assertEquals(Integer.valueOf(1), Integer.valueOf(h.getY()));
+		h.push(player, Direction.RIGHT);
+		assertEquals(Integer.valueOf(1), Integer.valueOf(h.getX()));
 		
 	}
 	
 	@Test
 	public final void nopushifopenTest() {
 		HandCart h = new HandCart(0,0);
-//		h.setThePosition(0,0);
 		StendhalRPZone zone = new StendhalRPZone("test", 10, 10);
 		Player player = PlayerTestHelper.createPlayer("pusher player");
 		zone.add(h, false);

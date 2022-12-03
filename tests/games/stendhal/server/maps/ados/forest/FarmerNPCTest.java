@@ -56,12 +56,14 @@ public class FarmerNPCTest extends ZonePlayerAndNPCTestImpl {
 		en = npc.getEngine();
 		player.setLevel(10);
 		en.step(player, "hello");
+		en.step(player, "handcart");
 		assertEquals("You're not at a high enough level to summon the cart. Keep working!", getReply(npc));
 		en.step(player, "goodbye");
 		
 		player.setLevel(510);
 		en.step(player, "hello");
-		assertEquals("Here is your cart!", getReply(npc));
+		en.step(player, "handcart");
+		assertEquals("Here is your hand cart!", getReply(npc));
 		en.step(player, "goodbye");
 	}
 	
