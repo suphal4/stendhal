@@ -934,13 +934,21 @@ public class Item extends PassiveEntity implements TurnListener, EquipListener,
 	 * @param slot slot where the item is equipped
 	 * @return unknown, see the note above
 	 */
-	public boolean onEquipped(RPEntity equipper, String slot) {
 
-		// this.prevEntity = equipper;
-		// this.prevSlot   = slot;
-
-		return false;
-	}
+public boolean onEquipped(RPEntity equipper, String slot) {
+		
+		if (!equipper.isInvisibleToCreatures() & this.getItemSubclass().equals("elvish_armor") & slot.contentEquals("armor")) {
+			if (equipper instanceof Player) {
+				String[] nalworLoc= {"-1_nalwor_caves", "-1_nalwor_caves_e", "-1_nalwor_caves_w", "-1_nalwor_drows_tunnel", "-1_nalwor_drows_tunnel_n", "-1_nalwor_drows_tunnel_ne", "-1_nalwor_drows_tunnel_nw", "-2_nalwor_drows_tunnel_nw, 0_nalwor_city", "0_nalwor_forest_e", "0_nalwor_forest_e2", "0_nalwor_forest_n", "0_nalwor_forest_n_e2", "0_nalwor_forest_ne", "0_nalwor_forest_nw", "0_nalwor_forest_w", "0_nalwor_river_s", "0_nalwor_river_s_e2", "0_nalwor_river_se", "0_nalwor_river_sw", "int_nalwor_assassinhq_0", "int_nalwor_assassinhq_1", "int_nalwor_assassinhq_cellar", "int_nalwor_bank", "int_nalwor_bank_1", "int_nalwor_flowershop", "int_nalwor_house1", "int_nalwor_house1_basement", "int_nalwor_house2", "int_nalwor_house3", "int_nalwor_house4", "int_nalwor_house4_1", "int_nalwor_house4_2", "int_nalwor_house_67", "int_nalwor_house_68", "int_nalwor_house_69", "int_nalwor_house_70", "int_nalwor_inn", "int_nalwor_inn_1", "int_nalwor_inn_basement", "int_nalwor_library", "int_nalwor_library_1", "int_nalwor_postoffice", "int_nalwor_pottery", "int_nalwor_prison", "int_nalwor_royal_hall", "int_nalwor_royal_hall_1", "int_nalwor_secret_room", "int_nalwor_tower_0", "int_nalwor_tower_1", "int_nalwor_tower_2", "int_nalwor_tower_3", "int_nalwor_tower_4", "int_nalwor_tower_5", "int_nalwor_tower_6", "int_nalwor_weaponshop"};
+				for (int i =0; i<56;i++) {
+					if (equipper.getZone().getName().contentEquals(nalworLoc[i])){
+						((Player) equipper).setInvisible(true);
+					}					}
+			}else if (equipper.isInvisibleToCreatures() & this.getItemSubclass().equals("elvish_armor") & !slot.contentEquals("armor")) {
+				((Player) equipper).setInvisible(false);
+				
+			}}return(false);}
+		
 
 	/**
 	 * item is about to be removed from owner.
@@ -954,6 +962,11 @@ public class Item extends PassiveEntity implements TurnListener, EquipListener,
 	 * @return needs documenting
 	 */
 	public boolean onUnequipped() {
+		if (this.getContainerOwner() instanceof Player) {
+			if (this.getItemSubclass().equals("elvish_armor")) {
+				((Player) this.getContainerOwner()).setInvisible(false);
+			}
+		}
 		return false;
 	}
 
