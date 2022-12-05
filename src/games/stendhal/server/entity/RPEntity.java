@@ -2154,7 +2154,9 @@ System.out.printf("  drop: %2d %2d\n", attackerRoll, defenderRoll);
 	 */
 	public final boolean equip(final String slotName, final Item item) {
 		RPSlot slot = getSlot(slotName);
+		
 		if (equipIt(slot, item)) {
+			item.onEquipped(this,slotName);
 			updateItemAtkDef();
 			return true;
 		}
