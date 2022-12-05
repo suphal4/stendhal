@@ -33,10 +33,7 @@ import utilities.ZonePlayerAndNPCTestImpl;
 public class ZekielsPracticeTestTest  extends ZonePlayerAndNPCTestImpl{
 	private static final int REQUIRED_IRON = 2;
 	private static final int REQUIRED_BEESWAX = 6;
-	private static final String quest_slot= "zekiels_practical_test";
 	private Player player = null;
-	private SpeakerNPC npc = null;
-	private Engine en = null;
 	
 
 	@BeforeClass
@@ -45,6 +42,7 @@ public class ZekielsPracticeTestTest  extends ZonePlayerAndNPCTestImpl{
 		
 	}
 
+	@Override
 	@Before
 	public void setUp(){
 		final StendhalRPZone zone = new StendhalRPZone("admin_test");

@@ -17,10 +17,17 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import games.stendhal.server.entity.player.Player;
+import games.stendhal.common.parser.Sentence;
+import games.stendhal.server.entity.mapstuff.block.HandCart;
+import games.stendhal.server.entity.npc.ChatAction;
 import games.stendhal.server.core.config.ZoneConfigurator;
+import games.stendhal.server.core.engine.SingletonRepository;
 import games.stendhal.server.core.engine.StendhalRPZone;
 import games.stendhal.server.core.pathfinder.FixedPath;
 import games.stendhal.server.core.pathfinder.Node;
+import games.stendhal.server.entity.npc.ConversationStates;
+import games.stendhal.server.entity.npc.EventRaiser;
 import games.stendhal.server.entity.npc.SpeakerNPC;
 import games.stendhal.server.entity.npc.behaviour.adder.SellerAdder;
 import games.stendhal.server.entity.npc.behaviour.impl.SellerBehaviour;
@@ -86,6 +93,13 @@ public class FarmerNPC implements ZoneConfigurator {
                 offerings.put("empty sack", 10);
                 new SellerAdder().addSeller(this, new SellerBehaviour(offerings));
 				addGoodbye("Bye bye. Be careful on your way.");
+				
+				add(ConversationStates.ATTENDING, "handcart", null, ConversationStates.ATTENDING, null, new ChatAction() {
+					@Override
+					public void fire(final Player pl, final Sentence s, final EventRaiser npc) {
+						placeHandCart(pl, npc);
+					}	
+				});
 			}
 		};
 
@@ -94,5 +108,19 @@ public class FarmerNPC implements ZoneConfigurator {
 		npc.setPosition(64, 76);
 		npc.initHP(100);
 		zone.add(npc);
+	}
+	
+	
+	//placecart
+	private void placeHandCart(Player pl, EventRaiser npc) {
+		if (pl.getLevel() >= 500) {
+			npc.say("Here is your hand cart!");
+			StendhalRPZone zone = SingletonRepository.getRPWorld().getZone("0_ados_forest_w2");
+			HandCart hc = new HandCart(pl.getX() +1, pl.getY()+1);
+			zone.add(hc);
+		}else {
+			npc.say("You're not at a high enough level to summon the cart. Keep working!");
+		}
+		
 	}
 }

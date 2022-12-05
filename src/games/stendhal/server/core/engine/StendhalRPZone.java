@@ -1975,4 +1975,6 @@ public class StendhalRPZone extends MarauroaRPZone {
 
 		return Arrays.asList(getAssociatedZones().split(","));
 	}
+	
+
 }
