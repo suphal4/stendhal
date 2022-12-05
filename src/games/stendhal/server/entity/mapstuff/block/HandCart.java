@@ -69,7 +69,6 @@ public class HandCart extends Chest implements ZoneEnterExitListener,
 	
 	
 	//uses and adapts the block class to implement the moving handcart feature
-
 	public HandCart(int i, int j) {
 		sounds=null;
 		this.multi=true;
@@ -79,7 +78,7 @@ public class HandCart extends Chest implements ZoneEnterExitListener,
 		
 	}
 	
-	
+	//reset the handcart
 	public void reset() {
 		wasMoved = false;
 		List<BlockTarget> blockTargetsAt = this.getZone().getEntitiesAt(getX(), getY(), BlockTarget.class);
@@ -90,6 +89,8 @@ public class HandCart extends Chest implements ZoneEnterExitListener,
 		SingletonRepository.getTurnNotifier().dontNotify(this);
 		this.notifyWorldAboutChanges();
 	}
+	
+	//push the handcart in a specific direction 
 	public void push(Player p, Direction d) {
 		if (!this.mayBePushed(d)) {
 			return;
@@ -111,6 +112,8 @@ public class HandCart extends Chest implements ZoneEnterExitListener,
 			logger.debug("Block [" + this.getID().toString() + "] pushed to (" + this.getX() + "," + this.getY() + ").");
 		}
 	}
+	
+
 	public void setResetBlock(boolean resetBlock) {
 		this.resetBlock = resetBlock;
 	}
@@ -123,6 +126,7 @@ public class HandCart extends Chest implements ZoneEnterExitListener,
 		}
 	}
 
+	//get the future coordinates of the handcart 
 	public int getYAfterPush(Direction d) {
 		return this.getY() + d.getdy();
 	}
@@ -130,12 +134,15 @@ public class HandCart extends Chest implements ZoneEnterExitListener,
 	public int getXAfterPush(Direction d) {
 		return this.getX() + d.getdx();
 	}
+	
+	//check if the hadncart was just pushed
 	private boolean wasPushed() {
 		boolean xChanged = this.getInt("x") != this.startX;
 		boolean yChanged = this.getInt("y") != this.startY;
 		return xChanged || yChanged;
 	}
 
+	//check if the handcart can be pushed
 	private boolean mayBePushed(Direction d) {
 		boolean pushed = wasPushed();
 		int newX = this.getXAfterPush(d);

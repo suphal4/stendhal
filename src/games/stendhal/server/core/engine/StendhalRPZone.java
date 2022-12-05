@@ -60,7 +60,6 @@ import games.stendhal.server.entity.creature.Sheep;
 import games.stendhal.server.entity.item.Item;
 import games.stendhal.server.entity.mapstuff.area.WalkBlocker;
 import games.stendhal.server.entity.mapstuff.area.WalkBlockerFactory;
-import games.stendhal.server.entity.mapstuff.block.HandCart;
 import games.stendhal.server.entity.mapstuff.portal.OneWayPortalDestination;
 import games.stendhal.server.entity.mapstuff.portal.Portal;
 import games.stendhal.server.entity.mapstuff.spawner.CreatureRespawnPoint;

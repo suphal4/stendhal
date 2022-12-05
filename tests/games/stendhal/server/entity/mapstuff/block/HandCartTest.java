@@ -34,6 +34,8 @@ public class HandCartTest {
 		
 	}
 
+	
+	//test that the cart can be added to the zone and then pushed 
 	@Test
 	public void pushTest() {
 		HandCart h = new HandCart(0,0);
@@ -53,6 +55,9 @@ public class HandCartTest {
 			
 	}
 
+	
+	//test that the coordinates of the pushed cart is correct
+	//checks each type of push (left, right, up, down)
 	@Test
 	public final void coordsTest() {
 		HandCart h = new HandCart(0,0);
@@ -71,6 +76,8 @@ public class HandCartTest {
 
 	}
 	
+	
+	//test the handcarts reaction to a collision
 	@Test
 	public final void collisionTest() {
 		HandCart h = new HandCart(0,0);
@@ -93,6 +100,8 @@ public class HandCartTest {
 		
 	}
 	
+	//test that the handcart cannot be pushed if it is open
+	//test that the handcart can be opened and closed
 	@Test
 	public final void nopushifopenTest() {
 		HandCart h = new HandCart(0,0);
