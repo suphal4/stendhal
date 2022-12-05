@@ -1,6 +1,11 @@
 Changelog
 ---------
 ---------
+1.41uom
+*world*
+- Handcart feature, allowing player to move items within an object (only for high level players)
+- Disguises features, players cannot be attacked when wearing elf armour
+
 1.40uom
 *world*
 - Haunchy now accepts coal as well as charcoal for the BBQ.

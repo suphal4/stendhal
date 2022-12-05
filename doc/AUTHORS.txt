@@ -203,15 +203,22 @@ Notable contributors:
   · NPCs
   Ananta Kakkar
   . Fixed Haunchy's charcoal bug
+  . Implemented handcarts feature
   Juanita Emeh
   . Fixed lieutenant drilenun bug
   Eiji Miyamoto
   . Fixed the horse hair bug
+  . Implemented disguises feature
   Suphal Sharma
   . Fixed fish soup bug
+  . Implemented disguises feature
   John Charles Dean
   . Fixed pet prevents bug
+  . Implemented disguises feature
   Adam-Zayd Saeed
   . Fixed Coralia bug 
-  Rose Halsall (h5****rh)
+  Rose Halsall
   . Fixed Zekiel bug
+  . Implemented handcarts feature
+  
+  
